@@ -6,4 +6,13 @@
 //
 
 import Foundation
+import Alamofire
 
+class Header {
+    static func getHeaders() -> HTTPHeaders {
+        let headers: HTTPHeaders = [
+            "Accept" : "application/json"
+        ]
+        return headers
+    }
+}

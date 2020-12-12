@@ -21,7 +21,7 @@ class PostCell: UITableViewCell {
     func setupUI() {
         self.contentView.backgroundColor = .clear
         self.backgroundColor = .clear
-        self.titleLabel.textColor = .white
+        self.titleLabel.textColor = .black
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

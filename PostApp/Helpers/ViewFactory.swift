@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 enum FactoryView {
-    case mainViewController
+    case postViewController
     case webViewController
 }
 class ViewFactory: NSObject {
@@ -18,8 +18,8 @@ class ViewFactory: NSObject {
         var viewController = UIViewController()
         
         switch view {
-        case .mainViewController:
-            viewController = self.instantiateVC(id: "\(MainViewController.self)")
+        case .postViewController:
+            viewController = self.instantiateVC(id: "\(PostViewController.self)")
         case .webViewController:
             viewController = self.instantiateVC(id: "\(WebViewController.self)")
         }
