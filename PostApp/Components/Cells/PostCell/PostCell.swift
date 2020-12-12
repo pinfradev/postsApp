@@ -15,6 +15,7 @@ class PostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
         self.setupUI()
     }
     
@@ -26,6 +27,24 @@ class PostCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func setData(post: Post) {
+        var titleText = ""
+        var authorDateText = ""
+        if let title = post.title {
+            titleText = title
+        } else if let storyTitle = post.storyTitle {
+            titleText = storyTitle
+        }
+        self.titleLabel.text = titleText
+        if let author = post.author {
+            authorDateText = author
+        }
+        if let date = post.createdAt {
+            authorDateText += " - " + date
+        }
+        self.AuthorAndDateLabel.text = authorDateText
     }
     
 }

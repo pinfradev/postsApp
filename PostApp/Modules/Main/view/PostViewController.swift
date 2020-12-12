@@ -11,7 +11,7 @@ class PostViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl = UIRefreshControl()
-    
+    var postArray = [Post]()
     // MARK: Properties
     var presenter: PostPresenterProtocol?
     
@@ -22,6 +22,10 @@ class PostViewController: UIViewController {
         self.refresh()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.isNavigationBarHidden = true
+    }
     func setupUI() {
         self.view.backgroundColor = .white
     }
@@ -39,13 +43,20 @@ class PostViewController: UIViewController {
     @objc func refresh() {
         self.presenter?.getPosts()
     }
+    
+    func relodData() {
+        self.tableView.reloadData()
+    }
 }
 
 extension PostViewController: PostViewProtocol {
     // TODO: implement view output methods
     func getPostsSucceded(postResponse: PostResponse) {
         self.refreshControl.endRefreshing()
-        print(postResponse)
+        if let posts = postResponse.hits {
+            self.postArray = posts
+        }
+        self.relodData()
     }
     
     func getPostsFailed(error: String) {
@@ -56,12 +67,13 @@ extension PostViewController: PostViewProtocol {
 
 extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return self.postArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "\(PostCell.self)", for: indexPath)
             as? PostCell {
+            cell.setData(post: postArray[indexPath.row])
             return cell
         }
         return UITableViewCell()
@@ -71,6 +83,18 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         return HeightForCell.postCell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let webView = ViewFactory.getViewController(.webViewController) as? WebViewController {
+            var urlString = ""
+            if let url = self.postArray[indexPath.row].url {
+                urlString = url
+            } else if let url = self.postArray[indexPath.row].storyUrl {
+                urlString = url
+            }
+            webView.urlString = urlString
+            self.navigationController?.pushViewController(webView, animated: true)
+        }
+    }
     
     
 }
