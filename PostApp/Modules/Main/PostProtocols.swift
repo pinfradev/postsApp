@@ -15,6 +15,9 @@ protocol PostViewProtocol: class {
     
     func getPostsSucceded(postResponse: PostResponse)
     func getPostsFailed(error: String)
+    
+    func gotLocalPostsSucceded(posts: [CurrentPostModel])
+    
 }
 
 protocol PostWireFrameProtocol: class {
@@ -29,12 +32,14 @@ protocol PostPresenterProtocol: class {
     var wireFrame: PostWireFrameProtocol? { get set }
     
     func getPosts()
+    func getLocalPosts()
 }
 
 protocol PostInteractorOutputProtocol: class {
 // INTERACTOR -> PRESENTER
     func getPostsSucceded(postResponse: PostResponse)
     func getPostsFailed(error: String)
+    func gotLocalPostIP(posts: [CurrentPostModel])
 }
 
 protocol PostInteractorInputProtocol: class {
@@ -43,6 +48,7 @@ protocol PostInteractorInputProtocol: class {
     var localDatamanager: PostLocalDataManagerInputProtocol? { get set }
     var remoteDatamanager: PostRemoteDataManagerInputProtocol? { get set }
     func getPosts()
+    func getLocalPosts()
 }
 
 protocol PostDataManagerInputProtocol: class {
@@ -64,5 +70,6 @@ protocol PostRemoteDataManagerOutputProtocol: class {
 
 protocol PostLocalDataManagerInputProtocol: class {
     // INTERACTOR -> LOCALDATAMANAGER
-
+    func saveCurrentPosts(posts: [Post])
+    func getLocalPosts() -> [CurrentPostModel]
 }

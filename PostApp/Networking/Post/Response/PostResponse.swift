@@ -22,6 +22,23 @@ struct Post: Codable {
     var storyUrl: String?
     var objectID: String
     
+    func getCurrentPostModel() -> CurrentPostModel {
+        let id = self.objectID
+        var currentPost = CurrentPostModel(id: id)
+        currentPost.author = self.author
+        if let url = self.url {
+            currentPost.url = url
+        } else if let storyUrl = self.storyUrl {
+            currentPost.url = storyUrl
+        }
+        if let title = self.url {
+            currentPost.title = title
+        } else if let storyTitle = self.storyTitle {
+            currentPost.title = storyTitle
+        }
+        currentPost.date = self.createdAt
+        return currentPost
+    }
     enum CodingKeys: String, CodingKey {
         case title
         case storyTitle = "story_title"

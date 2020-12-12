@@ -32,7 +32,7 @@ extension UIViewController {
     }
     
     func getCustomView(message: String) -> UIView {
-        let view = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 30.0))
+        let view = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: self.view.frame.width, height: 20.0))
         view.backgroundColor = .black
         view.textColor = .white
         view.textAlignment = .center

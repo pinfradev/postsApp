@@ -35,7 +35,7 @@ class WebViewController: UIViewController {
                 self.webView.load(urlRequest)
             } else {
                 DispatchQueue.main.async {
-                    self.showBanner(message: "modo offline")
+                    self.showBanner(message: "offline mode")
                 }
             }
         }
@@ -49,7 +49,9 @@ extension WebViewController: WKNavigationDelegate {
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print("error while loading")
         self.activityIndicator.stopAnimating()
+        DispatchQueue.main.async {
+            self.showBanner(message: "offline mode")
+        }
     }
 }

@@ -21,34 +21,6 @@ class CustomNavigationController: UINavigationController {
         bannerView.textColor = .white
         bannerView.textAlignment = .center
     }
-    
-//    func setupNetworkObserver() {
-//        // Register an observer for the network status
-//        NotificationCenter.default.addObserver(
-//            self,
-//            selector: #selector(networkStatusChanged(_:)),
-//            name: .reachabilityChanged,
-//            object: reachability
-//        )
-//        do {
-//            // Start the network status notifier
-//            try reachability?.startNotifier()
-//        } catch {
-//            print("Unable to start notifier")
-//        }
-//    }
-//    @objc func networkStatusChanged(_ notification: Notification) {
-//        print("changed ")
-//        let connected = UIViewController().isConnectedToInternet()
-//        if connected {
-//                self.hideBanner()
-//                self.offline = false
-//        } else {
-//            self.offline = true
-//            self.showBanner(title: "offline Mode")
-//        }
-//    }
-    
     func showBanner(title: String) {
         self.bannerView.text = title
         self.view.addSubview(self.bannerView)

@@ -18,15 +18,26 @@ class PostPresenter  {
 }
 
 extension PostPresenter: PostPresenterProtocol {
+    
     // TODO: implement presenter methods
     
     func getPosts() {
         self.interactor?.getPosts()
     }
+    
+    func getLocalPosts() {
+        self.interactor?.getLocalPosts()
+    }
+    
+    
    
 }
 
 extension PostPresenter: PostInteractorOutputProtocol {
+    func gotLocalPostIP(posts: [CurrentPostModel]) {
+        self.view?.gotLocalPostsSucceded(posts: posts)
+    }
+    
     // TODO: implement interactor output methods
     func getPostsSucceded(postResponse: PostResponse) {
         self.view?.getPostsSucceded(postResponse: postResponse)

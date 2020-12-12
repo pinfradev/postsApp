@@ -29,19 +29,17 @@ class PostCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    func setData(post: Post) {
+    func setData(post: CurrentPostModel) {
         var titleText = ""
         var authorDateText = ""
         if let title = post.title {
             titleText = title
-        } else if let storyTitle = post.storyTitle {
-            titleText = storyTitle
         }
         self.titleLabel.text = titleText
         if let author = post.author {
             authorDateText = author
         }
-        if let date = post.createdAt {
+        if let date = post.date {
             authorDateText += " - " + date
         }
         self.AuthorAndDateLabel.text = authorDateText

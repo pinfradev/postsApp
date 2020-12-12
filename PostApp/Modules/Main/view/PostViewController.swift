@@ -11,7 +11,7 @@ class PostViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var refreshControl = UIRefreshControl()
-    var postArray = [Post]()
+    var postArray = [CurrentPostModel]()
     // MARK: Properties
     var presenter: PostPresenterProtocol?
     
@@ -41,7 +41,11 @@ class PostViewController: UIViewController {
     }
     
     @objc func refresh() {
-        self.presenter?.getPosts()
+        if self.isConnectedToInternet() {
+            self.presenter?.getPosts()
+        } else {
+            self.presenter?.getLocalPosts()
+        }
     }
     
     func relodData() {
@@ -50,11 +54,20 @@ class PostViewController: UIViewController {
 }
 
 extension PostViewController: PostViewProtocol {
+    func gotLocalPostsSucceded(posts: [CurrentPostModel]) {
+        print(posts)
+        self.postArray = posts
+        self.tableView.reloadData()
+    }
+    
     // TODO: implement view output methods
     func getPostsSucceded(postResponse: PostResponse) {
         self.refreshControl.endRefreshing()
         if let posts = postResponse.hits {
-            self.postArray = posts
+            for post in posts {
+                let currentPost = post.getCurrentPostModel()
+                self.postArray.append(currentPost)
+            }
         }
         self.relodData()
     }
@@ -87,8 +100,6 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
         if let webView = ViewFactory.getViewController(.webViewController) as? WebViewController {
             var urlString = ""
             if let url = self.postArray[indexPath.row].url {
-                urlString = url
-            } else if let url = self.postArray[indexPath.row].storyUrl {
                 urlString = url
             }
             webView.urlString = urlString

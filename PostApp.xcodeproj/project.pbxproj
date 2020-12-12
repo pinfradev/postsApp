@@ -40,6 +40,8 @@
 		AB3BF45C2581A33300896914 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3BF45B2581A33300896914 /* WebViewController.swift */; };
 		ABF097CF25855509000CD148 /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF097CE25855509000CD148 /* ViewControllerExtension.swift */; };
 		ABF097D52585599A000CD148 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF097D42585599A000CD148 /* CustomNavigationController.swift */; };
+		ABF097F625857647000CD148 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF097F525857647000CD148 /* CoreDataManager.swift */; };
+		ABF0980025857D23000CD148 /* CurrentPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF097FF25857D23000CD148 /* CurrentPostModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +82,8 @@
 		AB3BF45B2581A33300896914 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		ABF097CE25855509000CD148 /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		ABF097D42585599A000CD148 /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
+		ABF097F525857647000CD148 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		ABF097FF25857D23000CD148 /* CurrentPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentPostModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +181,7 @@
 		AB211F75258510D300571B14 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				ABF097FF25857D23000CD148 /* CurrentPostModel.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 				AB211F232584EF6400571B14 /* ViewFactory.swift */,
 				AB211F6C2584F75700571B14 /* Constants.swift */,
 				ABF097D42585599A000CD148 /* CustomNavigationController.swift */,
+				ABF097F525857647000CD148 /* CoreDataManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -475,6 +481,7 @@
 				AB211F94258511A000571B14 /* PostWireFrame.swift in Sources */,
 				AB211F4C2584F1E900571B14 /* Header.swift in Sources */,
 				AB3BF42F25819F3B00896914 /* PostViewController.swift in Sources */,
+				ABF0980025857D23000CD148 /* CurrentPostModel.swift in Sources */,
 				ABF097CF25855509000CD148 /* ViewControllerExtension.swift in Sources */,
 				AB211F642584F2E300571B14 /* PostCell.swift in Sources */,
 				AB211F91258511A000571B14 /* PostInteractor.swift in Sources */,
@@ -490,6 +497,7 @@
 				ABF097D52585599A000CD148 /* CustomNavigationController.swift in Sources */,
 				AB211F692584F33200571B14 /* PostResponse.swift in Sources */,
 				AB3BF42D25819F3B00896914 /* SceneDelegate.swift in Sources */,
+				ABF097F625857647000CD148 /* CoreDataManager.swift in Sources */,
 				AB211F432584F1BA00571B14 /* APIBasis.swift in Sources */,
 				AB211F8E258511A000571B14 /* PostPresenter.swift in Sources */,
 				AB3BF45C2581A33300896914 /* WebViewController.swift in Sources */,
