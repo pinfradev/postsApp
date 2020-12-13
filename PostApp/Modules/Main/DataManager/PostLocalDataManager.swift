@@ -10,6 +10,7 @@ import Foundation
 
 
 class PostLocalDataManager:PostLocalDataManagerInputProtocol {
+    
 
     private let manager = CoreDataManager()
     
@@ -42,6 +43,15 @@ class PostLocalDataManager:PostLocalDataManagerInputProtocol {
         self.manager.deleteAllData()
     }
     
+    func saveDeletedPostIL(post: CurrentPostModel) {
+        self.manager.createDeletedPost(id: post.id, title: post.title, date: post.date, author: post.author) {
+            print("save deleted post")
+        }
+    }
     
+    func getDeletedPosts() -> [DeletedPost] {
+        let deletedPosts = self.manager.getDeletedPosts()
+        return deletedPosts
+    }
     
 }

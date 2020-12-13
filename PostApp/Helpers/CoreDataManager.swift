@@ -17,21 +17,19 @@ class CoreDataManager {
         self.context = appDelegate.persistentContainer.viewContext
     }
     
-    func createCurrentPost(id: String,
+    func createDeletedPost(id: String,
                            title: String?,
                            date: String?,
                            author: String?,
-                           url: String,
                            completion: @escaping () -> Void) {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let currentPost = CurrentPost(context: self.context)
+        let currentPost = DeletedPost(context: self.context)
         currentPost.id = id
         currentPost.title = title
         currentPost.date = date
         currentPost.author = author
-        currentPost.url = url
         appDelegate.saveContext()
-        
+        print("deleted \(id) post created")
     }
     
     func saveSeveralPosts(posts: [CurrentPostModel]) {
@@ -74,5 +72,17 @@ class CoreDataManager {
         } catch {
             print("error deleting data")
         }
+    }
+    
+    func getDeletedPosts() -> [DeletedPost]{
+        let fetchRequest: NSFetchRequest<DeletedPost> = DeletedPost.fetchRequest()
+        do {
+            let result = try self.context.fetch(fetchRequest)
+            return result
+        } catch {
+            print("error getting current Post")
+        }
+        
+        return []
     }
 }
