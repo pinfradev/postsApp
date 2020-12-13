@@ -39,7 +39,7 @@ class PostCell: UITableViewCell {
         if let author = post.author {
             authorDateText = author
         }
-        if let date = post.date {
+        if let date = post.formattedDate {
             authorDateText += " - " + date
         }
         self.AuthorAndDateLabel.text = authorDateText

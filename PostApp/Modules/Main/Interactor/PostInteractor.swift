@@ -70,7 +70,7 @@ extension PostInteractor: PostRemoteDataManagerOutputProtocol {
         if let deletedPosts = self.localDatamanager?.getDeletedPosts(), let posts = postResponse.hits {
             postsToSend = posts
             for deletedPost in deletedPosts {
-                if let index = posts.firstIndex(where: { (post) -> Bool in
+                if let index = postsToSend.firstIndex(where: { (post) -> Bool in
                     post.objectID == deletedPost.id
                 }) {
                     postsToSend.remove(at: index)
