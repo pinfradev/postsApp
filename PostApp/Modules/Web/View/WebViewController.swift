@@ -51,7 +51,7 @@ extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         self.activityIndicator.stopAnimating()
         DispatchQueue.main.async {
-            self.showBanner(message: "offline mode")
+            self.showBanner(message: "resource not found")
         }
     }
 }
