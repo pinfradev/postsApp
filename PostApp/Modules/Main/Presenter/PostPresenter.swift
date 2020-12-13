@@ -29,7 +29,9 @@ extension PostPresenter: PostPresenterProtocol {
         self.interactor?.getLocalPosts()
     }
     
-    
+    func deleteLocalDataVP() {
+        self.interactor?.deleteLocalDataPI()
+    }
    
 }
 

@@ -10,6 +10,7 @@ import Foundation
 
 class PostInteractor: PostInteractorInputProtocol {
     
+    
     // MARK: Properties
     weak var presenter: PostInteractorOutputProtocol?
     var localDatamanager: PostLocalDataManagerInputProtocol?
@@ -32,6 +33,10 @@ class PostInteractor: PostInteractorInputProtocol {
             }
         }
         self.presenter?.gotLocalPostIP(posts: localPostsArray)
+    }
+    
+    func deleteLocalDataPI() {
+        self.localDatamanager?.deleteLocalDataIL()
     }
 }
 

@@ -11,8 +11,6 @@ import Foundation
 
 class PostLocalDataManager:PostLocalDataManagerInputProtocol {
 
-    
-    
     private let manager = CoreDataManager()
     
     func getLocalPosts() -> [CurrentPostModel] {
@@ -38,6 +36,10 @@ class PostLocalDataManager:PostLocalDataManagerInputProtocol {
             postModelArray.append(currentPost)
         }
         manager.saveSeveralPosts(posts: postModelArray)
+    }
+    
+    func deleteLocalDataIL() {
+        self.manager.deleteAllData()
     }
     
     

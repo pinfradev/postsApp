@@ -33,6 +33,7 @@ protocol PostPresenterProtocol: class {
     
     func getPosts()
     func getLocalPosts()
+    func deleteLocalDataVP()
 }
 
 protocol PostInteractorOutputProtocol: class {
@@ -49,6 +50,7 @@ protocol PostInteractorInputProtocol: class {
     var remoteDatamanager: PostRemoteDataManagerInputProtocol? { get set }
     func getPosts()
     func getLocalPosts()
+    func deleteLocalDataPI()
 }
 
 protocol PostDataManagerInputProtocol: class {
@@ -72,4 +74,5 @@ protocol PostLocalDataManagerInputProtocol: class {
     // INTERACTOR -> LOCALDATAMANAGER
     func saveCurrentPosts(posts: [Post])
     func getLocalPosts() -> [CurrentPostModel]
+    func deleteLocalDataIL()
 }

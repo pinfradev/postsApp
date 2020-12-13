@@ -42,8 +42,13 @@ class PostViewController: UIViewController {
     
     @objc func refresh() {
         if self.isConnectedToInternet() {
+            self.presenter?.deleteLocalDataVP()
             self.presenter?.getPosts()
         } else {
+            DispatchQueue.main.async {
+                self.showBanner(message: "Offline mode")
+            }
+            self.refreshControl.endRefreshing()
             self.presenter?.getLocalPosts()
         }
     }

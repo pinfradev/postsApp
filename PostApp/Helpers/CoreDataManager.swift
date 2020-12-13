@@ -64,4 +64,15 @@ class CoreDataManager {
         
         return []
     }
+    
+    func deleteAllData() {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "\(CurrentPost.self)")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        do {
+            try self.context.persistentStoreCoordinator?.execute(deleteRequest, with: self.context)
+            print("deleted data succesfully")
+        } catch {
+            print("error deleting data")
+        }
+    }
 }
