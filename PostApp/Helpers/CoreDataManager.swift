@@ -29,7 +29,6 @@ class CoreDataManager {
         currentPost.date = date
         currentPost.author = author
         appDelegate.saveContext()
-        print("deleted \(id) post created")
     }
     
     func saveSeveralPosts(posts: [CurrentPostModel]) {
@@ -68,7 +67,6 @@ class CoreDataManager {
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
         do {
             try self.context.persistentStoreCoordinator?.execute(deleteRequest, with: self.context)
-            print("deleted data succesfully")
         } catch {
             print("error deleting data")
         }

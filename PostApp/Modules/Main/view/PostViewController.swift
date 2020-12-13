@@ -14,11 +14,13 @@ class PostViewController: UIViewController {
     var postArray = [CurrentPostModel]()
     // MARK: Properties
     var presenter: PostPresenterProtocol?
+    var activityIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupUI()
         self.setupTableView()
+        self.activityIndicator.startAnimating()
         self.refresh()
     }
 
@@ -27,6 +29,11 @@ class PostViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
     }
     func setupUI() {
+        self.activityIndicator.frame = self.view.frame
+        self.activityIndicator.hidesWhenStopped = true
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.color = .blue
+        self.view.addSubview(self.activityIndicator)
         self.view.backgroundColor = .white
     }
     
@@ -46,7 +53,8 @@ class PostViewController: UIViewController {
             self.presenter?.deleteLocalDataVP()
             self.presenter?.getPosts()
         } else {
-            DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                 self.showBanner(message: "Offline mode")
             }
             self.refreshControl.endRefreshing()
@@ -61,7 +69,6 @@ class PostViewController: UIViewController {
 
 extension PostViewController: PostViewProtocol {
     func gotLocalPostsSucceded(posts: [CurrentPostModel]) {
-        print(posts)
         self.postArray = posts
         self.tableView.reloadData()
     }
@@ -69,6 +76,7 @@ extension PostViewController: PostViewProtocol {
     // TODO: implement view output methods
     func getPostsSucceded(postResponse: PostResponse) {
         self.refreshControl.endRefreshing()
+        self.activityIndicator.stopAnimating()
         if let posts = postResponse.hits {
             for post in posts {
                 let currentPost = post.getCurrentPostModel()
@@ -80,13 +88,13 @@ extension PostViewController: PostViewProtocol {
     
     func getPostsFailed(error: String) {
         self.refreshControl.endRefreshing()
+        self.activityIndicator.stopAnimating()
         print(error)
     }
     
     private func deleteCell(indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive, title: "Delete") { [weak self](_, _, _) in
             guard let self = self else {return}
-            print(self.postArray[indexPath.row])
             self.presenter?.saveDeletedPost(post: self.postArray[indexPath.row])
             self.postArray.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
