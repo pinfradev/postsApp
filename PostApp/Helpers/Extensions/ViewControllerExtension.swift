@@ -27,8 +27,7 @@ extension UIViewController {
     
     func showBanner(message: String) {
         let banner = NotificationBanner(customView: self.getCustomView(message: message))
-        banner.show(queuePosition: .front,bannerPosition: .bottom, on: self)
-        
+        banner.show(queuePosition: .front,bannerPosition: .bottom, queue: .init(maxBannersOnScreenSimultaneously: 1), on: self)
     }
     
     func getCustomView(message: String) -> UIView {

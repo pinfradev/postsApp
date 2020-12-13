@@ -36,7 +36,6 @@ class PostInteractor: PostInteractorInputProtocol {
                     if let index = localPostsArray.firstIndex(where: { (post) -> Bool in
                         post.id == deletedPost.id
                     }) {
-                        print(localPostsArray[index])
                         localPostsArray.remove(at: index)
                         continue
                     }
