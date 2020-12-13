@@ -34,6 +34,7 @@ protocol PostPresenterProtocol: class {
     func getPosts()
     func getLocalPosts()
     func deleteLocalDataVP()
+    func saveDeletedPost(post: CurrentPostModel)
 }
 
 protocol PostInteractorOutputProtocol: class {
@@ -51,6 +52,7 @@ protocol PostInteractorInputProtocol: class {
     func getPosts()
     func getLocalPosts()
     func deleteLocalDataPI()
+    func saveDeletedPostPI(post: CurrentPostModel)
 }
 
 protocol PostDataManagerInputProtocol: class {
@@ -75,4 +77,6 @@ protocol PostLocalDataManagerInputProtocol: class {
     func saveCurrentPosts(posts: [Post])
     func getLocalPosts() -> [CurrentPostModel]
     func deleteLocalDataIL()
+    func saveDeletedPostIL(post: CurrentPostModel)
+    func getDeletedPosts() -> [DeletedPost]
 }

@@ -42,6 +42,7 @@ class PostViewController: UIViewController {
     
     @objc func refresh() {
         if self.isConnectedToInternet() {
+            self.postArray.removeAll()
             self.presenter?.deleteLocalDataVP()
             self.presenter?.getPosts()
         } else {
@@ -81,6 +82,18 @@ extension PostViewController: PostViewProtocol {
         self.refreshControl.endRefreshing()
         print(error)
     }
+    
+    private func deleteCell(indexPath: IndexPath) -> UIContextualAction {
+        let action = UIContextualAction(style: .destructive, title: "Delete") { [weak self](_, _, _) in
+            guard let self = self else {return}
+            print(self.postArray[indexPath.row])
+            self.presenter?.saveDeletedPost(post: self.postArray[indexPath.row])
+            self.postArray.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        
+        return action
+    }
 }
 
 extension PostViewController: UITableViewDelegate, UITableViewDataSource {
@@ -91,7 +104,9 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "\(PostCell.self)", for: indexPath)
             as? PostCell {
-            cell.setData(post: postArray[indexPath.row])
+            if indexPath.row < postArray.count {
+                cell.setData(post: postArray[indexPath.row])
+            }
             return cell
         }
         return UITableViewCell()
@@ -110,6 +125,12 @@ extension PostViewController: UITableViewDelegate, UITableViewDataSource {
             webView.urlString = urlString
             self.navigationController?.pushViewController(webView, animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = self.deleteCell(indexPath: indexPath)
+        let swipe = UISwipeActionsConfiguration(actions: [delete])
+        return swipe
     }
     
     

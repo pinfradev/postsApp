@@ -33,6 +33,9 @@ extension PostPresenter: PostPresenterProtocol {
         self.interactor?.deleteLocalDataPI()
     }
    
+    func saveDeletedPost(post: CurrentPostModel) {
+        self.interactor?.saveDeletedPostPI(post: post)
+    }
 }
 
 extension PostPresenter: PostInteractorOutputProtocol {
